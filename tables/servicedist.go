@@ -77,6 +77,11 @@ func GetServicedistTable(ctx *context.Context) table.Table {
 	info.AddField("IPV6", "IPV6", db.Varchar).FieldHide()
 	info.AddField("服务列表", "servicelist", db.Varchar).FieldEditAble(editType.Text).FieldFilterable(types.FilterType{Operator: types.FilterOperatorLike})
 
+    info.AddSelectBox("应用名", types.FieldOptions{
+		{Value: "MQTT", Text: "MQTT"},
+		{Value: "EKAFKA", Text: "EKAFKA"},
+	}, action.FieldFilter("appname"))
+
 	info.SetTable("servicedist").SetTitle("服务部署列表").SetDescription("Servicedist")
 
 	formList := servicedist.GetForm()
